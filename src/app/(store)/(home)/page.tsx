@@ -17,15 +17,6 @@ async function getFeaturedProducts(): Promise<Product[]> {
 const Home = async () => {
   const [highlightedProduct, ...otherProducts] = await getFeaturedProducts();
 
-  function formatProductPrice(price: number) {
-    return price.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
-  }
-
   return (
     <div className="grid max-h-215 grid-cols-9 grid-rows-6 gap-6">
       <Link
@@ -44,7 +35,12 @@ const Home = async () => {
         <div className="absolute bottom-28 right-28 h-12 flex items-center gap-2 max-w-70 rounded-full border-2 border-zinc-500 bg-black/60 p-1 pl-5">
           <span className="text-sm truncate">{highlightedProduct.title}</span>
           <span className="flex h-full items-center justify-center rounded-full bg-violet-500 px-4 font-semibold">
-            {formatProductPrice(highlightedProduct.price)}
+            {highlightedProduct.price.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })}
           </span>
         </div>
       </Link>
@@ -68,7 +64,12 @@ const Home = async () => {
             <div className="absolute bottom-10 right-10 h-12 flex items-center gap-2 max-w-70 rounded-full border-2 border-zinc-500 bg-black/60 p-1 pl-5">
               <span className="text-sm truncate">{product.title}</span>
               <span className="flex h-full items-center justify-center rounded-full bg-violet-500 px-4 font-semibold">
-                {formatProductPrice(product.price)}
+                {product.price.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}
               </span>
             </div>
           </Link>
